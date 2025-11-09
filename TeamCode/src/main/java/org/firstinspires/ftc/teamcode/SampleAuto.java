@@ -22,15 +22,27 @@ public class SampleAuto extends LinearOpMode {
         Pose2d beginPose = new Pose2d(new Vector2d(0,0),0);
 
         MecanumDrive drive = new MecanumDrive(hardwareMap,beginPose);
+        Launcher launcher = new Launcher(hardwareMap);
+        Vector2d target = new Vector2d(20,10);
+
         waitForStart();
-        dis.initialize();
-        Action move = drive.actionBuilder(beginPose)
-                .strafeTo(new Vector2d(0,-6))
+        double dx = (target.x - beginPose.position.x);
+        double dy = (target.y - beginPose.position.y);
+
+        Action turn = drive.actionBuilder(beginPose)
+                .turn(Math.atan(dy/dx))
                 .build();
-        while (opModeIsActive()){
-            if (dis.getDistance(DistanceUnit.CM) < 50){
-                Actions.runBlocking(move);
-            }
-        }
+        Action shoot = launcher.Launch(Math.hypot(dx,dy)*0.0254);
+
+
+        Actions.runBlocking(
+                new SequentialAction(
+                        turn,
+                        shoot
+                )
+        );
+
+
+
     }
 }
