@@ -74,6 +74,8 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
 
+    private boolean slowMode = false;
+
     @Override
     public void runOpMode() {
 
@@ -108,6 +110,9 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+            if(gamepad1.leftStickButtonWasPressed())
+                slowMode = !slowMode;
+
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
@@ -153,10 +158,10 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             */
 
             // Send calculated power to wheels
-            frontLeftDrive.setPower(frontLeftPower);
-            frontRightDrive.setPower(frontRightPower);
-            backLeftDrive.setPower(backLeftPower);
-            backRightDrive.setPower(backRightPower);
+            frontLeftDrive.setPower(frontLeftPower * (slowMode ? 0.5 : 1));
+            frontRightDrive.setPower(frontRightPower * (slowMode ? 0.5 : 1));
+            backLeftDrive.setPower(backLeftPower * (slowMode ? 0.5 : 1));
+            backRightDrive.setPower(backRightPower * (slowMode ? 0.5 : 1));
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

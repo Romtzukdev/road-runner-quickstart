@@ -17,6 +17,8 @@ public class FullRobotControl extends LinearOpMode
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
 
+    private boolean slowMode = false;
+
     //Wheel Vars
     private double speed = 0;
     private double lerpSpeed = 0.1;
@@ -56,6 +58,9 @@ public class FullRobotControl extends LinearOpMode
         runtime.reset();
 
         while (opModeIsActive()) {
+            if(gamepad1.leftStickButtonWasPressed())
+                slowMode = !slowMode;
+
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
@@ -84,10 +89,10 @@ public class FullRobotControl extends LinearOpMode
             }
 
             // Send calculated power to wheels
-            frontLeftDrive.setPower(frontLeftPower);
-            frontRightDrive.setPower(frontRightPower);
-            backLeftDrive.setPower(backLeftPower);
-            backRightDrive.setPower(backRightPower);
+            frontLeftDrive.setPower(frontLeftPower * (slowMode ? 0.5 : 1));
+            frontRightDrive.setPower(frontRightPower * (slowMode ? 0.5 : 1));
+            backLeftDrive.setPower(backLeftPower * (slowMode ? 0.5 : 1));
+            backRightDrive.setPower(backRightPower * (slowMode ? 0.5 : 1));
 
             //Controls
             if(gamepad2.aWasPressed())
