@@ -32,13 +32,11 @@ public class SampleAuto extends LinearOpMode {
         Action turn = drive.actionBuilder(beginPose)
                 .turn(Math.atan(dy/dx))
                 .build();
-        Action shoot = launcher.Launch(Math.hypot(dx,dy)*0.0254);
 
 
         Actions.runBlocking(
                 new SequentialAction(
-                        turn,
-                        shoot
+                        turn
                 )
         );
 
