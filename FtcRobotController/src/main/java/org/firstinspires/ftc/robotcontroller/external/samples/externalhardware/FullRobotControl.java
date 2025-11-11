@@ -29,10 +29,10 @@ public class FullRobotControl extends LinearOpMode
     public void runOpMode() throws InterruptedException
     {
         //Motor Setup
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "motor1");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "motor2");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "motor3");
-        backRightDrive = hardwareMap.get(DcMotor.class, "motor4");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeft");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "frontRight");
+        backRightDrive = hardwareMap.get(DcMotor.class, "backRight");
 
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
