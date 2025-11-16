@@ -3,6 +3,8 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 //Ah Yes. Copy-Pasted Code. My Favorite (because i don't need to use my brain)
 //https://docs.limelightvision.io/docs/docs-limelight/apis/ftc-programming
 
+//IT WORKS!!!!
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
@@ -22,7 +24,7 @@ public class LimelightTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException
     {
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight = hardwareMap.get(Limelight3A.class, "Ethernet Device"); // Yeah Fuck That I'll Use "Ethernet Device"
 
         telemetry.setMsTransmissionInterval(11);
 
@@ -39,20 +41,22 @@ public class LimelightTest extends LinearOpMode {
             LLResult result = limelight.getLatestResult();
             if (result != null) {
                 if (result.isValid()) {
-                    //"Basic" Results (idk what these mean but i think it's important)
+                    /*//"Basic" Results (idk what these mean but i think it's important)
                     Pose3D botpose = result.getBotpose();
                     telemetry.addData("tx", result.getTx());
                     telemetry.addData("ty", result.getTy());
-                    telemetry.addData("Botpose", botpose.toString());
+                    telemetry.addData("Botpose", botpose.toString());*/
 
                     //AprilTag Results (oh yeah the good shit)
                     List<LLResultTypes.FiducialResult> fiducialResults = result.getFiducialResults();
                     for (LLResultTypes.FiducialResult fr /*hehe lol*/ : fiducialResults) {
-                        telemetry.addData("Fiducial", "ID: %d, Family: %s, X: %.2f, Y: %.2f", fr.getFiducialId(), fr.getFamily(), fr.getTargetXDegrees(), fr.getTargetYDegrees());
+                        telemetry.addData("Fiducial", "ID: %d, X: %.2f, Y: %.2f", fr.getFiducialId(), fr.getTargetXDegrees(), fr.getTargetYDegrees());
                     }
 
                 }
             }
+
+            //telemetry.addData("LIMELIGJTHGGKSGRWG", limelight);
             telemetry.update();
         }
     }
