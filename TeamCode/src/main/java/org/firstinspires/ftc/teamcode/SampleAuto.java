@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -17,28 +18,30 @@ public class SampleAuto extends LinearOpMode {
     private Rev2mDistanceSensor dis;
     @Override
     public void runOpMode() throws InterruptedException {
-        dis = hardwareMap.get(Rev2mDistanceSensor.class,"dis");
 
-        Pose2d beginPose = new Pose2d(new Vector2d(0,0),0);
+        Pose2d beginPose = new Pose2d(new Vector2d(-30,0),Math.toRadians(180));
 
         MecanumDrive drive = new MecanumDrive(hardwareMap,beginPose);
-        Launcher launcher = new Launcher(hardwareMap);
-        Vector2d target = new Vector2d(20,10);
-
+        Intake intake = new Intake(hardwareMap);
         waitForStart();
-        double dx = (target.x - beginPose.position.x);
-        double dy = (target.y - beginPose.position.y);
 
-        Action turn = drive.actionBuilder(beginPose)
-                .turn(Math.atan(dy/dx))
+        Action first = drive.actionBuilder(beginPose)
+                .strafeTo(new Vector2d(-4, 0))
+                .turn(Math.toRadians(-90))
+                .strafeTo(new Vector2d(-4, -56))
+                .waitSeconds(2)
                 .build();
-
-
-        Actions.runBlocking(
-                new SequentialAction(
-                        turn
-                )
+        SequentialAction s = new SequentialAction(
+                intake.Take(1,20000)
         );
+        Actions.runBlocking(
+            new ParallelAction(
+                    first,
+                    s
+            )
+
+        );
+
 
 
 
