@@ -25,18 +25,21 @@ public class SampleAuto extends LinearOpMode {
         Intake intake = new Intake(hardwareMap);
         waitForStart();
 
-        Action turn = drive.actionBuilder(beginPose)
+        Action first = drive.actionBuilder(beginPose)
                 .strafeTo(new Vector2d(-4, 0))
                 .turn(Math.toRadians(-90))
-                .strafeTo(new Vector2d(-4, -50))
+                .strafeTo(new Vector2d(-4, -56))
+                .waitSeconds(2)
                 .build();
-        Action Take = intake.Take(1,20000000);
-
+        SequentialAction s = new SequentialAction(
+                intake.Take(1,20000)
+        );
         Actions.runBlocking(
-                new ParallelAction(
-                        turn,
-                        Take
-                )
+            new ParallelAction(
+                    first,
+                    s
+            )
+
         );
 
 

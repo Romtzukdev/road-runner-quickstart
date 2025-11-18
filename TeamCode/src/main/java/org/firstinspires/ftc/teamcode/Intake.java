@@ -27,4 +27,16 @@ public class Intake {
             }
         };
     }
+    public Action waitMs(double time_in_ms){
+        return new Action() {
+            ElapsedTime timer = new ElapsedTime();
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+                while(timer.milliseconds() < time_in_ms){
+                    return true;
+                }
+                return false;
+            }
+        };
+    }
 }
