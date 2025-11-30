@@ -7,6 +7,8 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
 public class MeepMeepTesting {
+    static int row = 1;
+
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
 
@@ -16,9 +18,40 @@ public class MeepMeepTesting {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-64, -64, Math.toRadians(180)))
-                .strafeTo(new Vector2d(-4, 0))
-                        .turn(Math.toRadians(90))
-                .strafeTo(new Vector2d(-4, -50))
+                //Welp. Wanted To NOT Make It Spaghetti Code
+                //First Row
+                .strafeTo(new Vector2d(-12 + (row - 1) * 24, 0))
+                        .turn(Math.toRadians(-90))
+                .strafeTo(new Vector2d(-12 + (row - 1) * 24, -50))
+                .waitSeconds(1)
+                .strafeTo(new Vector2d(-12, 0))
+                    .turn(Math.toRadians(-45))
+                .strafeTo(new Vector2d(-34, -24))
+                    .waitSeconds(1)
+                .turn(Math.toRadians(135))
+
+                //Second Row
+                .strafeTo(new Vector2d(-12 + 1 * 24, 0))
+                .turn(Math.toRadians(-90))
+                .strafeTo(new Vector2d(-12 + 1 * 24, -50))
+                .waitSeconds(1)
+                .strafeTo(new Vector2d(-12, 0))
+                .turn(Math.toRadians(-45))
+                .strafeTo(new Vector2d(-34, -24))
+                .waitSeconds(1)
+                .turn(Math.toRadians(135))
+
+                //Third Row
+                .strafeTo(new Vector2d(-12 + 2 * 24, 0))
+                .turn(Math.toRadians(-90))
+                .strafeTo(new Vector2d(-12 + 2 * 24, -50))
+                .waitSeconds(1)
+                .strafeTo(new Vector2d(-12, 0))
+                .turn(Math.toRadians(-45))
+                .strafeTo(new Vector2d(-34, -24))
+                .waitSeconds(1)
+                .turn(Math.toRadians(135))
+
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_BLACK)
