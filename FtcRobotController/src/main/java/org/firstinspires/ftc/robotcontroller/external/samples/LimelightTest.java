@@ -41,11 +41,11 @@ public class LimelightTest extends LinearOpMode {
             LLResult result = limelight.getLatestResult();
             if (result != null) {
                 if (result.isValid()) {
-                    /*//"Basic" Results (idk what these mean but i think it's important)
-                    Pose3D botpose = result.getBotpose();
+                    //"Basic" Results (idk what these mean but i think it's important)
+                    Pose3D botpose = result.getBotpose_MT2();
                     telemetry.addData("tx", result.getTx());
                     telemetry.addData("ty", result.getTy());
-                    telemetry.addData("Botpose", botpose.toString());*/
+                    telemetry.addData("Botpose", botpose.toString());
 
                     //AprilTag Results (oh yeah the good shit)
                     List<LLResultTypes.FiducialResult> fiducialResults = result.getFiducialResults();
