@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 //FullRobotControl? Sounds Familiar
-@TeleOp(name = "Full Robot Control", group = "11AA So It Will Be The First")
+@TeleOp(name = "Full Robot Control", group = "11AA So It Will Be The First, But it doesn't work")
 public class FullRobotControl extends LinearOpMode
 {
     //Motor Vars
