@@ -58,11 +58,12 @@ public final class MecanumDrive {
         // TODO: fill in these values based on
         //   see https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html?highlight=imu#physical-hub-mounting
         public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
-                RevHubOrientationOnRobot.LogoFacingDirection.UP;
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
         public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+                RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
         // drive model parameters
+<<<<<<< HEAD
         public double inPerTick = 0.002;
         public double lateralInPerTick = 0.001588253091286823;
         public double trackWidthTicks = 6500.99722268654;
@@ -71,20 +72,36 @@ public final class MecanumDrive {
         public double kS = 0.8619367244528418;
         public double kV = 0.0003582795246481917;
         public double kA = 0.00001;
+=======
+        public double inPerTick = 0.0023; //previously 0.0019
+        public double lateralInPerTick = 0.0015700488814880294;
+        public double trackWidthTicks = 6400.324367823671;
 
-        // path profile parameters (in inches)
-        public double maxWheelVel = 50;
-        public double minProfileAccel = -30;
-        public double maxProfileAccel = 50;
+        // feedforward parameters (in tick units)
+        public double kS = 0.8266771209186845;
+        public double kV = 0.0003719162537084625;
+        public double kA = 0.0000001;
+>>>>>>> e2f03add1a1b3abaff57576ebfbef8294d8c888e
 
-        // turn profile parameters (in radians)
+                // path profile parameters (in inches)
+                public double maxWheelVel = 50;
+                public double minProfileAccel = -30;
+                public double maxProfileAccel = 50;
+
+                // turn profile parameters (in radians)
         public double maxAngVel = Math.PI; // shared with path
         public double maxAngAccel = Math.PI;
 
         // path controller gains
+<<<<<<< HEAD
         public double axialGain = 0.04;
         public double lateralGain = 0.35;
         public double headingGain = 2; // shared with turn
+=======
+        public double axialGain = 0.0;
+        public double lateralGain = 0.0;
+        public double headingGain = 1; // shared with turn
+>>>>>>> e2f03add1a1b3abaff57576ebfbef8294d8c888e
 
         public double axialVelGain = 0.05;
         public double lateralVelGain = 0.0;
@@ -238,6 +255,9 @@ public final class MecanumDrive {
 
         // TODO: reverse motor directions if needed
         //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -249,7 +269,12 @@ public final class MecanumDrive {
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
+<<<<<<< HEAD
         localizer = new PinpointLocalizer(hardwareMap, PARAMS.inPerTick,pose);
+=======
+        localizer = new PinpointLocalizer(hardwareMap,PARAMS .inPerTick, pose);
+
+>>>>>>> e2f03add1a1b3abaff57576ebfbef8294d8c888e
 
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
     }
